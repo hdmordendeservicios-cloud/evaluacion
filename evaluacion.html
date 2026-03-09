@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Evaluación de Trabajo - HDM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#005B9A", 
+                        "primary-dark": "#004575",
+                        "surface": "#FFFFFF",
+                        "background": "#F8FAFC",
+                        "text-main": "#1E293B",
+                        "text-sub": "#64748B",
+                    },
+                    fontFamily: { sans: ["Inter", "sans-serif"] },
+                    boxShadow: { 'premium': '0 10px 25px -5px rgba(0, 0, 0, 0.04)' }
+                },
+            },
+        };
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0084CA 0%, #005B9A 100%); background-attachment: fixed; }
+        canvas { touch-action: none; } 
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 antialiased">
+    
+    <div class="w-full max-w-[420px] bg-surface rounded-2xl shadow-premium border border-slate-100 overflow-hidden relative">
+        <div class="p-6 sm:p-8">
+            
+            <div class="flex flex-col items-center mb-6 text-center">
+                <img src="https://i.ibb.co/rCsz6hh/LOGOTIPO.png" alt="Logo HDM" class="mb-4 object-contain h-20"> 
+                <h1 class="text-2xl font-extrabold text-[#1E293B] tracking-tight text-center">Evaluación de Trabajo Realizado</h1>
+                <p class="text-xs font-medium text-[#64748B] mt-1 text-center">Sistemas de Filtración de Agua SA. de C.V.</p>
+            </div>
+            
+            <div id="formSection" class="space-y-4 block">
+                
+                <div>
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide" for="folioInput">Folio:</label>
+                    <div class="relative flex items-center mt-1">
+                        <input required id="folioInput" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary uppercase placeholder-slate-400" placeholder="Ej. HDM-0080" type="text">
+                    </div>
+                    <p id="warn-folio" class="hidden text-xs text-red-500 mt-1 font-medium">* El Folio es obligatorio</p>
+                </div>
+
+                <div>
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide" for="employeeName">Nombre del Empleado:</label>
+                    <input type="text" id="employeeName" class="w-full mt-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary placeholder-slate-400" placeholder="Nombre completo">
+                    <p id="warn-employeeName" class="hidden text-xs text-red-500 mt-1 font-medium">* El Nombre es obligatorio</p>
+                </div>
+
+                <div>
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide" for="employeePosition">Cargo de Empleado:</label>
+                    <input type="text" id="employeePosition" class="w-full mt-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary placeholder-slate-400" placeholder="Puesto">
+                    <p id="warn-employeePosition" class="hidden text-xs text-red-500 mt-1 font-medium">* El Cargo es obligatorio</p>
+                </div>
+
+                <div>
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide" for="numEmpleadoInput">Número de Empleado:</label>
+                    <input type="text" id="numEmpleadoInput" class="w-full mt-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary placeholder-slate-400" placeholder="Ej. EJBM">
+                    <p id="warn-numEmpleado" class="hidden text-xs text-red-500 mt-1 font-medium">* El Número es obligatorio</p>
+                </div>
+
+                <div>
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide" for="serviceLevel">Nivel de Servicio:</label>
+                    <select id="serviceLevel" class="w-full mt-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+                        <option value="" disabled selected style="color: #757575;">Selecciona una opción</option>
+                        <option value="ACEPTADO">ACEPTADO</option>
+                        <option value="NO ACEPTADO">NO ACEPTADO</option>
+                    </select>
+                    <p id="warn-serviceLevel" class="hidden text-xs text-red-500 mt-1 font-medium">* Seleccione un nivel</p>
+                </div>
+
+                <div>
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide" for="exitComment">Comentario de Salida:</label>
+                    <textarea id="exitComment" rows="2" class="w-full mt-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary placeholder-slate-400" placeholder="Introduce tu comentario..."></textarea>
+                    <p id="warn-exitComment" class="hidden text-xs text-red-500 mt-1 font-medium">* Obligatorio si es NO ACEPTADO</p>
+                </div>
+
+                <div class="pt-2">
+                    <label class="text-[12px] font-bold text-slate-700 ml-0.5 uppercase tracking-wide">Firma de Autorización:</label>
+                    <div class="mt-2 border-2 border-slate-300 rounded-xl overflow-hidden bg-white shadow-inner relative h-[180px]">
+                        <canvas id="signatureCanvas" class="w-full h-full cursor-crosshair touch-none"></canvas>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                        <button type="button" onclick="clearCanvas()" class="text-xs font-bold text-red-600 hover:text-red-800 bg-red-50 px-3 py-1.5 rounded-md transition-colors">
+                            <span class="material-symbols-outlined text-[14px] align-middle">ink_eraser</span> LIMPIAR FIRMA
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-6">
+                    <button type="button" id="btnEnviar" onclick="sendForm()" class="w-full py-4 bg-emerald-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-emerald-700 transition-all active:scale-[0.98] flex items-center justify-center uppercase tracking-wider">
+                        <span class="material-symbols-outlined mr-2">send</span> ENVIAR EVALUACIÓN
+                    </button>
+                    
+                    <button type="button" onclick="redirectSesion()" class="w-full py-3.5 bg-red-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-red-700 transition-all active:scale-[0.98] flex items-center justify-center uppercase tracking-wider">
+                        <span class="material-symbols-outlined mr-2">logout</span> CERRAR SESIÓN
+                    </button>
+                </div>
+            </div>
+
+            <div id="successSection" class="hidden text-center py-8 animate-fade-in space-y-5">
+                <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="material-symbols-outlined text-5xl text-emerald-600">check_circle</span>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800">¡Evaluación Registrada!</h2>
+                <p class="text-sm text-slate-600">Su respuesta ha sido guardada correctamente vinculada al folio:</p>
+                
+                <div class="bg-blue-50 border-2 border-primary py-4 px-6 rounded-xl inline-block mx-auto mb-8 shadow-sm">
+                    <span id="displayFolio" class="text-2xl font-extrabold text-primary tracking-widest uppercase">---</span>
+                </div>
+
+                <p class="text-[13px] text-text-sub pt-6">Cierre esta pestaña o regrese al portal principal.</p>
+
+                <button type="button" onclick="redirectSesion()" class="w-full py-4 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary-dark transition-all shadow-md">
+                    VOLVER AL PORTAL
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="mt-6 mb-4 text-center">
+        <p class="text-[11px] font-medium uppercase tracking-widest text-white/70 drop-shadow-md">
+            © 2026 HDM MÉXICO. Todos los derechos reservados.
+        </p>
+    </div>
+
+    <script>
+        // ======================================================================
+        // 🔴🔴 PEGA AQUÍ TU ENLACE DE GOOGLE APPS SCRIPT (Termina en /exec)
+        // ======================================================================
+        const API_URL = "https://script.google.com/macros/s/TU_CODIGO_AQUI/exec";
+
+        // Función para conectar con Apps Script vía Fetch
+        async function apiCall(action, params = {}) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: action, ...params })
+                });
+                return await response.json();
+            } catch (error) { return { error: "Error de conexión." }; }
+        }
+
+        // Configuración de la Firma (Canvas)
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            const ratio =  Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            ctx.scale(ratio, ratio);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let isDrawing = false;
+        let pos = { x: 0, y: 0 };
+
+        canvas.addEventListener('mousedown', startPosition);
+        canvas.addEventListener('touchstart', startPosition, { passive: false });
+        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('touchend', endPosition);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('touchmove', draw, { passive: false });
+
+        function startPosition(e) { e.preventDefault(); isDrawing = true; updatePosition(e); }
+        function endPosition() { isDrawing = false; ctx.beginPath(); }
+        
+        function updatePosition(e) {
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches && e.touches.length > 0) {
+                pos.x = e.touches[0].clientX - rect.left; pos.y = e.touches[0].clientY - rect.top;
+            } else {
+                pos.x = e.clientX - rect.left; pos.y = e.clientY - rect.top;
+            }
+        }
+
+        function draw(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#1E293B'; 
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            updatePosition(e);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Validación y Envío Principal (Rediseñado para Fetch y Base64)
+        async function sendForm() {
+            const folio = document.getElementById("folioInput");
+            const empName = document.getElementById("employeeName");
+            const empPos = document.getElementById("employeePosition");
+            const numEmp = document.getElementById("numEmpleadoInput");
+            const srvLvl = document.getElementById("serviceLevel");
+            const comment = document.getElementById("exitComment");
+            const btn = document.getElementById("btnEnviar");
+
+            let isValid = true;
+
+            const showWarn = (input, warnId) => { document.getElementById(warnId).classList.remove("hidden"); input.classList.add("border-red-500", "focus:ring-red-500"); isValid = false; };
+            const hideWarn = (input, warnId) => { document.getElementById(warnId).classList.add("hidden"); input.classList.remove("border-red-500", "focus:ring-red-500"); };
+
+            if (folio.value.trim() === "") { showWarn(folio, "warn-folio"); } else { hideWarn(folio, "warn-folio"); }
+            if (empName.value.trim() === "") { showWarn(empName, "warn-employeeName"); } else { hideWarn(empName, "warn-employeeName"); }
+            if (empPos.value.trim() === "") { showWarn(empPos, "warn-employeePosition"); } else { hideWarn(empPos, "warn-employeePosition"); }
+            if (numEmp.value.trim() === "") { showWarn(numEmp, "warn-numEmpleado"); } else { hideWarn(numEmp, "warn-numEmpleado"); }
+            if (srvLvl.value === "") { showWarn(srvLvl, "warn-serviceLevel"); } else { hideWarn(srvLvl, "warn-serviceLevel"); }
+            if (srvLvl.value === "NO ACEPTADO" && comment.value.trim() === "") { showWarn(comment, "warn-exitComment"); } else { hideWarn(comment, "warn-exitComment"); }
+
+            if (!isValid) return;
+
+            // Bloquear botón
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">autorenew</span> PROCESANDO...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            try {
+                // 1. Convertir la firma a Base64
+                const base64Image = canvas.toDataURL("image/png").split(',')[1];
+                const fileData = {
+                    filename: "signature " + folio.value.trim(),
+                    mimeType: "image/png",
+                    base64: base64Image
+                };
+
+                // 2. Subir imagen a Drive
+                const uploadRes = await apiCall('saveFile', { fileData: fileData });
+                if (uploadRes.error) throw new Error(uploadRes.error);
+
+                // 3. Guardar todos los datos en Sheets
+                const saveRes = await apiCall('answer', {
+                    folio: folio.value.trim(),
+                    employeeName: empName.value,
+                    employeePosition: empPos.value,
+                    timcketNumber: numEmp.value,
+                    serviceLevel: srvLvl.value,
+                    exitComment: comment.value,
+                    fileUrl: uploadRes.fileUrl
+                });
+
+                if (saveRes.error) throw new Error(saveRes.error);
+
+                // 4. Mostrar pantalla de éxito
+                document.getElementById("formSection").style.display = "none";
+                document.getElementById("displayFolio").innerText = folio.value.trim().toUpperCase();
+                document.getElementById("successSection").classList.remove("hidden");
+
+            } catch (error) {
+                alert("Error al procesar la evaluación: " + error.message);
+                btn.disabled = false;
+                btn.innerHTML = '<span class="material-symbols-outlined mr-2">send</span> ENVIAR EVALUACIÓN';
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        }
+
+        // Redirección
+        function redirectSesion() {
+            window.top.location.href = 'https://hdmordendeservicios-cloud.github.io/HDMAPI/';
+        }
+    </script>
+</body>
+</html>
